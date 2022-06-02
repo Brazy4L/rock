@@ -1,18 +1,20 @@
-// Array for words. Randomising computer choice
+// Array for words. Randomising Computer Choice
 
 let words = ['Rock', 'Paper', 'Scissors'];
-let computerPlay = words[Math.floor(Math.random() * words.length)]
-
+let computerPlay = words[Math.floor(Math.random() * words.length)];
 const computerSelection = computerPlay;
-const playerSelection = 'Rock';
+// Player Choice
 
-// Case-insensitive for playerSelection
+let playerPlay = prompt('Rock, Paper or Scissors?');
+const playerSelection = playerPlay;
 
-function capitalize(string) {
+// Case-insensitive Player Input
+
+function caseInsensitive(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-// Game
+// Game logic
 
 function playRound(playerSelection, computerSelection) {
     if (computerSelection === 'Rock' && playerSelection === 'Scissors') {
@@ -27,13 +29,19 @@ function playRound(playerSelection, computerSelection) {
         return 'You Win! Paper beats Rock';
     } else if (computerSelection === 'Paper' && playerSelection === 'Scissors') {
         return 'You Win! Scissors beats Paper';
+    } else if (computerSelection === 'Rock' && playerSelection === 'Rock') {
+        return 'Draw!';
+    } else if (computerSelection === 'Paper' && playerSelection === 'Paper') {
+        return 'Draw!';
+    } else if (computerSelection === 'Scissors' && playerSelection === 'Scissors') {
+        return 'Draw!';
     } else {
-        return 'Tie!'
+        return 'Try again! Type: Rock, Paper or Scissors';
     }
 }
 
 // Announcing Choices and Results
 
-console.log('Player: ' + capitalize(playerSelection));
+console.log('Player: ' + caseInsensitive(playerSelection));
 console.log('Computer: ' + computerSelection);
-console.log(playRound(capitalize(playerSelection), computerSelection));
+console.log(playRound(caseInsensitive(playerSelection), computerSelection));
