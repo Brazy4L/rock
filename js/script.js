@@ -1,18 +1,15 @@
-// Array for words. Randomising Computer Choice
-
-let words = ['Rock', 'Paper', 'Scissors'];
-let computerPlay = words[Math.floor(Math.random() * words.length)];
-const computerSelection = computerPlay;
-// Player Choice
-
-let playerPlay = prompt('Rock, Paper or Scissors?');
-const playerSelection = playerPlay;
-
-// Case-insensitive Player Input
+// Case-Insensitive Player Input
 
 function caseInsensitive(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
+
+// Computer and Player Choice
+
+let words = ['Rock', 'Paper', 'Scissors'];
+let computerSelection = words[Math.floor(Math.random() * words.length)];
+let playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
+
 
 // Game logic
 
@@ -40,8 +37,46 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Announcing Choices and Results
+// Game of 5 Rounds
 
-console.log('Player: ' + caseInsensitive(playerSelection));
-console.log('Computer: ' + computerSelection);
-console.log(playRound(caseInsensitive(playerSelection), computerSelection));
+function game() {
+
+    for (let i = 0; i < 5; i++) {
+        if (i === 0) {
+            console.log('<<< Round One! >>>');
+            console.log('Player: ' + playerSelection);
+            console.log('Computer: ' + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
+        } else if (i === 1) {
+            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
+            computerSelection = words[Math.floor(Math.random() * words.length)];
+            console.log('<<< Round Two! >>>');
+            console.log('Player: ' + playerSelection);
+            console.log('Computer: ' + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
+        } else if (i === 2) {
+            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
+            computerSelection = words[Math.floor(Math.random() * words.length)];
+            console.log('<<< Round Three! >>>');
+            console.log('Player: ' + playerSelection);
+            console.log('Computer: ' + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
+        } else if (i === 3) {
+            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
+            computerSelection = words[Math.floor(Math.random() * words.length)];
+            console.log('<<< Round Four! >>>');
+            console.log('Player: ' + playerSelection);
+            console.log('Computer: ' + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
+        } else if (i === 4) {
+            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
+            computerSelection = words[Math.floor(Math.random() * words.length)];
+            console.log('<<< Round Five! >>>');
+            console.log('Player: ' + playerSelection);
+            console.log('Computer: ' + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
+        }
+    }
+}
+
+game()
