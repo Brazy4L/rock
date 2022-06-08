@@ -1,120 +1,77 @@
-// Case-Insensitive Player Input
+const words = ['Rock', 'Paper', 'Scissors'];
+let computerSelection = '';
+let playerSelection = '';
 
-function caseInsensitive(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
+const player = document.querySelector('#player');
+const computer = document.querySelector('#computer');
+const result = document.querySelector('#result');
+const currentPlayerScore = document.querySelector('#currentPlayerScore');
+const currentComputerScore = document.querySelector('#currentComputerScore');
+const winner = document.querySelector('#winner');
 
-// Computer and Player Choice
+let playerScore = 0;
+let computerScore = 0;
 
-let words = ['Rock', 'Paper', 'Scissors'];
-let computerSelection = words[Math.floor(Math.random() * words.length)];
-let playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
+// Game stats, Player and Computer selections on click
 
+const buttons = document.querySelectorAll('.rps');
+buttons.forEach(button => button.addEventListener('click', function () {
+    playerSelection = button.textContent;
+    computerSelection = words[Math.floor(Math.random() * words.length)];
+    player.textContent = ('Player: ' + playerSelection);
+    computer.textContent = ('Computer: ' + computerSelection);
+    result.textContent = game(playerSelection, computerSelection);
+    currentPlayerScore.textContent = ('Current player score: ' + playerScore);
+    currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+    winner.textContent = '';
+    keepingScore();
+    winnerCheck();
+}));
 
-// Game logic
+function winnerCheck() {
+    if (playerScore === 5 && computerScore === 5) {
+        winner.textContent = 'Draw! 5 - 5';
+        playerScore = 0;
+        computerScore = 0;
+        currentPlayerScore.textContent = ('Current player score: ' + playerScore);
+        currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+    } else if (playerScore === 5) {
+        winner.textContent = `You Won! 5 - ${computerScore}`;
+        playerScore = 0;
+        computerScore = 0;
+        currentPlayerScore.textContent = ('Current player score: ' + playerScore);
+        currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+    } else if (computerScore === 5) {
+        winner.textContent = `You Lost! ${playerScore} - 5`;
+        playerScore = 0;
+        computerScore = 0;
+        currentPlayerScore.textContent = ('Current player score: ' + playerScore);
+        currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+}};
 
-function playRound(playerSelection, computerSelection) {
+function keepingScore() {
+    if ((playerScore < 5 || computerScore < 5) && result.textContent.includes('Win')) {
+        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
+    } else if ((playerScore < 5 || computerScore < 5) && result.textContent.includes('Lose')) {
+        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
+    } else if ((playerScore < 5 || computerScore < 5) && result.textContent.includes('Draw')) {
+        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
+        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
+}};
+
+function game(playerSelection, computerSelection) {
     if (computerSelection === 'Rock' && playerSelection === 'Scissors') {
-        return 'You Lose! Rock crushes Scissors';
+        return 'You Lose!';
     } else if (computerSelection === 'Paper' && playerSelection === 'Rock') {
-        return 'You Lose! Paper covers Rock';
+        return 'You Lose!';
     } else if (computerSelection === 'Scissors' && playerSelection === 'Paper') {
-        return 'You Lose! Scissors cuts Paper';
+        return 'You Lose!';
     } else if (computerSelection === 'Scissors' && playerSelection === 'Rock') {
-        return 'You Win! Rock crushes Scissors';
+        return 'You Win!';
     } else if (computerSelection === 'Rock' && playerSelection === 'Paper') {
-        return 'You Win! Paper covers Rock';
+        return 'You Win!';
     } else if (computerSelection === 'Paper' && playerSelection === 'Scissors') {
-        return 'You Win! Scissors cuts Paper';
-    } else if (computerSelection === 'Rock' && playerSelection === 'Rock') {
-        return 'Draw!';
-    } else if (computerSelection === 'Paper' && playerSelection === 'Paper') {
-        return 'Draw!';
-    } else if (computerSelection === 'Scissors' && playerSelection === 'Scissors') {
-        return 'Draw!';
+        return 'You Win!';
     } else {
-        return 'Try again! Type: Rock, Paper or Scissors';
-    }
-}
-
-// Game of 5 Rounds
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        if (i === 0) {
-            console.log('<<< Round One! >>>');
-            console.log('Player: ' + playerSelection);
-            console.log('Computer: ' + computerSelection);
-            console.log(playRound(playerSelection, computerSelection));
-            if (playRound(playerSelection, computerSelection).includes('Win')) {
-                playerScore++;
-            } else if (playRound(playerSelection, computerSelection).includes('Lose')) {
-                computerScore++;
-            } 
-            console.log('Player - ' + playerScore + ' Computer - ' + computerScore);
-        } else if (i === 1) {
-            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
-            computerSelection = words[Math.floor(Math.random() * words.length)];
-            console.log('<<< Round Two! >>>');
-            console.log('Player: ' + playerSelection);
-            console.log('Computer: ' + computerSelection);
-            console.log(playRound(playerSelection, computerSelection));
-            if (playRound(playerSelection, computerSelection).includes('Win')) {
-                playerScore++;
-            } else if (playRound(playerSelection, computerSelection).includes('Lose')) {
-                computerScore++;
-            } 
-            console.log('Player - ' + playerScore + ' Computer - ' + computerScore);
-        } else if (i === 2) {
-            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
-            computerSelection = words[Math.floor(Math.random() * words.length)];
-            console.log('<<< Round Three! >>>');
-            console.log('Player: ' + playerSelection);
-            console.log('Computer: ' + computerSelection);
-            console.log(playRound(playerSelection, computerSelection));
-            if (playRound(playerSelection, computerSelection).includes('Win')) {
-                playerScore++;
-            } else if (playRound(playerSelection, computerSelection).includes('Lose')) {
-                computerScore++;
-            } 
-            console.log('Player - ' + playerScore + ' Computer - ' + computerScore);
-        } else if (i === 3) {
-            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
-            computerSelection = words[Math.floor(Math.random() * words.length)];
-            console.log('<<< Round Four! >>>');
-            console.log('Player: ' + playerSelection);
-            console.log('Computer: ' + computerSelection);
-            console.log(playRound(playerSelection, computerSelection));
-            if (playRound(playerSelection, computerSelection).includes('Win')) {
-                playerScore++;
-            } else if (playRound(playerSelection, computerSelection).includes('Lose')) {
-                computerScore++;
-            } 
-            console.log('Player - ' + playerScore + ' Computer - ' + computerScore);
-        } else if (i === 4) {
-            playerSelection = caseInsensitive(prompt('Rock, Paper or Scissors?'));
-            computerSelection = words[Math.floor(Math.random() * words.length)];
-            console.log('<<< Round Five! >>>');
-            console.log('Player: ' + playerSelection);
-            console.log('Computer: ' + computerSelection);
-            console.log(playRound(playerSelection, computerSelection));
-            if (playRound(playerSelection, computerSelection).includes('Win')) {
-                playerScore++;
-            } else if (playRound(playerSelection, computerSelection).includes('Lose')) {
-                computerScore++;
-            } 
-            console.log('Player - ' + playerScore + ' Computer - ' + computerScore);
-            if (playerScore > computerScore) {
-                console.log('You Won! ' + playerScore + " - " + computerScore);
-            } else if (playerScore < computerScore) {
-                console.log('You Lost! ' + playerScore + " - " + computerScore);
-            } else {
-                console.log('Tie! ' + playerScore + " - " + computerScore);
-            }
-        }
-    }
-}
-
-game()
+        return 'Draw!';
+}};
