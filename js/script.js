@@ -14,7 +14,7 @@ let computerScore = 0;
 
 // Game stats, Player and Computer selections on click
 
-const buttons = document.querySelectorAll('.rps');
+const buttons = document.querySelectorAll('button');
 buttons.forEach(button => button.addEventListener('click', function () {
     playerSelection = button.textContent;
     computerSelection = words[Math.floor(Math.random() * words.length)];
@@ -27,6 +27,33 @@ buttons.forEach(button => button.addEventListener('click', function () {
     keepingScore();
     winnerCheck();
 }));
+
+function game(playerSelection, computerSelection) {
+    if (computerSelection === 'Rock' && playerSelection === 'Scissors') {
+        return 'You Lose!';
+    } else if (computerSelection === 'Paper' && playerSelection === 'Rock') {
+        return 'You Lose!';
+    } else if (computerSelection === 'Scissors' && playerSelection === 'Paper') {
+        return 'You Lose!';
+    } else if (computerSelection === 'Scissors' && playerSelection === 'Rock') {
+        return 'You Win!';
+    } else if (computerSelection === 'Rock' && playerSelection === 'Paper') {
+        return 'You Win!';
+    } else if (computerSelection === 'Paper' && playerSelection === 'Scissors') {
+        return 'You Win!';
+    } else {
+        return 'Draw!';
+}};
+
+function keepingScore() {
+    if (result.textContent.includes('Win')) {
+        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
+    } else if (result.textContent.includes('Lose')) {
+        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
+    } else if (result.textContent.includes('Draw')) {
+        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
+        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
+}};
 
 function winnerCheck() {
     if (playerScore === 5 && computerScore === 5) {
@@ -47,31 +74,4 @@ function winnerCheck() {
         computerScore = 0;
         currentPlayerScore.textContent = ('Current player score: ' + playerScore);
         currentComputerScore.textContent = ('Current computer score: ' + computerScore);
-}};
-
-function keepingScore() {
-    if ((playerScore < 5 || computerScore < 5) && result.textContent.includes('Win')) {
-        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
-    } else if ((playerScore < 5 || computerScore < 5) && result.textContent.includes('Lose')) {
-        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
-    } else if ((playerScore < 5 || computerScore < 5) && result.textContent.includes('Draw')) {
-        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
-        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
-}};
-
-function game(playerSelection, computerSelection) {
-    if (computerSelection === 'Rock' && playerSelection === 'Scissors') {
-        return 'You Lose!';
-    } else if (computerSelection === 'Paper' && playerSelection === 'Rock') {
-        return 'You Lose!';
-    } else if (computerSelection === 'Scissors' && playerSelection === 'Paper') {
-        return 'You Lose!';
-    } else if (computerSelection === 'Scissors' && playerSelection === 'Rock') {
-        return 'You Win!';
-    } else if (computerSelection === 'Rock' && playerSelection === 'Paper') {
-        return 'You Win!';
-    } else if (computerSelection === 'Paper' && playerSelection === 'Scissors') {
-        return 'You Win!';
-    } else {
-        return 'Draw!';
 }};
