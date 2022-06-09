@@ -21,8 +21,8 @@ buttons.forEach(button => button.addEventListener('click', function () {
     player.textContent = ('Player: ' + playerSelection);
     computer.textContent = ('Computer: ' + computerSelection);
     result.textContent = game(playerSelection, computerSelection);
-    currentPlayerScore.textContent = ('Current player score: ' + playerScore);
-    currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+    currentPlayerScore.textContent = ('Player Score: ' + playerScore);
+    currentComputerScore.textContent = ('Computer Score: ' + computerScore);
     winner.textContent = '';
     keepingScore();
     winnerCheck();
@@ -47,31 +47,31 @@ function game(playerSelection, computerSelection) {
 
 function keepingScore() {
     if (result.textContent.includes('Win')) {
-        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
+        currentPlayerScore.textContent = ('Player Score: ' + ++playerScore);
     } else if (result.textContent.includes('Lose')) {
-        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
+        currentComputerScore.textContent = ('Computer Score: ' + ++computerScore);
     } else if (result.textContent.includes('Draw')) {
-        currentPlayerScore.textContent = ('Current player score: ' + ++playerScore);
-        currentComputerScore.textContent = ('Current computer score: ' + ++computerScore);
+        currentPlayerScore.textContent = ('Player Score: ' + ++playerScore);
+        currentComputerScore.textContent = ('Computer Score: ' + ++computerScore);
 }};
 
 function winnerCheck() {
     if (playerScore === 5 && computerScore === 5) {
-        winner.textContent = 'Draw! 5 - 5';
+        winner.textContent = 'Tie! 5 - 5';
         playerScore = 0;
         computerScore = 0;
-        currentPlayerScore.textContent = ('Current player score: ' + playerScore);
-        currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+        currentPlayerScore.textContent = ('Player Score: ' + playerScore);
+        currentComputerScore.textContent = ('Computer Score: ' + computerScore);
     } else if (playerScore === 5) {
         winner.textContent = `You Won! 5 - ${computerScore}`;
         playerScore = 0;
         computerScore = 0;
-        currentPlayerScore.textContent = ('Current player score: ' + playerScore);
-        currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+        currentPlayerScore.textContent = ('Player Score: ' + playerScore);
+        currentComputerScore.textContent = ('Computer Score: ' + computerScore);
     } else if (computerScore === 5) {
         winner.textContent = `You Lost! ${playerScore} - 5`;
         playerScore = 0;
         computerScore = 0;
-        currentPlayerScore.textContent = ('Current player score: ' + playerScore);
-        currentComputerScore.textContent = ('Current computer score: ' + computerScore);
+        currentPlayerScore.textContent = ('Player Score: ' + playerScore);
+        currentComputerScore.textContent = ('Computer Score: ' + computerScore);
 }};
